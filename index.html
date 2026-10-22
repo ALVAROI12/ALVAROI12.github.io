@@ -74,10 +74,11 @@ canvas{display:block;width:100%;height:auto;background:
 button{font:inherit;font-size:.92rem;padding:8px 15px;border-radius:6px;min-height:40px;border:1px solid var(--btn);background:var(--btn);color:#fff;cursor:pointer;transition:background .15s,border-color .15s}
 @media (prefers-reduced-motion:reduce){button{transition:none}}
 button:hover{background:var(--btn-hover);border-color:var(--btn-hover)}
-button:active{background:#143A99;border-color:#143A99}
+button:not(.ghost):active{background:#143A99;border-color:#143A99}
 button.ghost{background:transparent;color:var(--d-text);border-color:var(--d-line)}
 button.ghost:hover{border-color:var(--signal);color:#fff;background:transparent}
-button.ghost:active{background:var(--d-grid)}
+.panel:not(.light) button.ghost:active,.panel:not(.light) button.ghost:hover:active{background:var(--d-grid);color:#fff}
+.panel .muted{color:var(--d-mute)}
 button:disabled{opacity:.45;cursor:default}
 label.range{display:inline-flex;gap:10px;align-items:center;color:var(--d-mute)}
 input[type=range]{accent-color:var(--signal);width:140px}
