@@ -111,22 +111,32 @@ section>.wrap>h2{margin-bottom:10px}
 .review.show{display:block}
 
 /* projects */
-.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px 34px;border-top:2px solid var(--ink);margin-top:6px}
-.proj{padding:20px 0 18px;border-bottom:1px solid var(--line)}
-.proj h3 a{color:var(--ink);border:0}
-.proj h3 a:hover{color:var(--signal-deep)}
-.proj p{margin:7px 0 9px;color:var(--ink2);font-size:.95rem}
-.proj .stack{font-size:.82rem;color:var(--muted);font-family:"IBM Plex Mono",monospace}
-.proj .metric{color:var(--ink);font-weight:600}
+.projects{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:2px 34px;border-top:2px solid var(--ink);margin-top:6px}
+.proj{padding:22px 0 20px;border-bottom:1px solid var(--line)}
+.proj h3{line-height:1.3}
+.proj h3 a{color:var(--ink);border-bottom:1px solid transparent}
+.proj h3 a:hover,.proj h3 a:focus-visible{color:var(--signal-deep);border-bottom-color:var(--signal-deep)}
+.proj h3 a:focus-visible{outline:2px solid var(--signal-deep);outline-offset:3px}
+.proj p{margin:8px 0 10px;color:var(--ink2);font-size:.95rem;line-height:1.6;max-width:62ch}
+.proj p.stack{margin:0;font-size:.82rem;color:var(--ink2);font-family:"IBM Plex Mono",monospace}
+.proj .metric{color:var(--ink);font-weight:700}
+@media(max-width:600px){.projects{grid-template-columns:1fr;gap:4px}}
 
 /* experience */
-.xp{border-top:2px solid var(--ink);margin-top:6px}
-.xp-row{display:grid;grid-template-columns:13ch 1fr;gap:16px;padding:17px 0;border-bottom:1px solid var(--line)}
+.xp{list-style:none;padding:0;border-top:2px solid var(--ink);margin-top:14px}
+.xp-row{display:grid;grid-template-columns:13ch 1fr;gap:16px;padding:19px 0;border-bottom:1px solid var(--line);scroll-margin-top:80px}
 @media(max-width:600px){.xp-row{grid-template-columns:1fr;gap:4px}}
-.xp-row .when{color:var(--muted);font-size:.9rem;padding-top:3px}
-.xp-row h3{font-size:1rem}
-.xp-row .org{color:var(--ink2);font-size:.95rem}
-.xp-row p{margin:6px 0 0;font-size:.95rem;color:var(--ink2);max-width:66ch}
+.xp-row .when{color:var(--ink2);font-size:.9rem;padding-top:3px;font-variant-numeric:tabular-nums}
+.xp-row h3{font-size:1.02rem;line-height:1.3}
+.xp-row .org{color:var(--ink2);font-size:.92rem;margin-top:2px}
+.xp-row p{margin:8px 0 0;font-size:.95rem;line-height:1.6;color:var(--ink2);max-width:66ch}
+.xp-row .metric{color:var(--ink);font-weight:700}
+
+/* projects+experience (w3) */
+.role-note{font-weight:400;color:var(--ink2)}
+.xp-row.cyber{border-left:3px solid var(--signal-deep);padding-left:14px;background:linear-gradient(90deg,rgba(77,141,255,.07),transparent 70%)}
+.xp-row.cyber .when::after{content:"cybersecurity";display:inline-block;margin-left:8px;padding:1px 7px;border:1px solid var(--signal-deep);border-radius:99px;color:var(--signal-deep);font:500 .72rem "IBM Plex Mono",monospace;vertical-align:1px}
+@media(max-width:600px){.xp-row.cyber .when::after{margin-left:0;margin-right:8px;order:-1}}
 
 footer{padding:60px 0 52px;color:var(--ink2);font-size:.98rem}
 footer .links{display:flex;flex-wrap:wrap;gap:20px;margin-top:10px}
@@ -272,87 +282,87 @@ footer .links{display:flex;flex-wrap:wrap;gap:20px;margin-top:10px}
 <section id="work">
   <div class="wrap">
     <h2>Projects</h2>
-    <p class="sub">Everything below is public on <a href="https://github.com/ALVAROI12">github.com/ALVAROI12</a>, with tests and evaluation scripts where it matters.</p>
-    <div class="projects">
-      <div class="proj">
-        <h3><a href="https://github.com/ALVAROI12/settlement-reconciler">Settlement reconciliation agent</a></h3>
+    <p class="sub">Everything below is public on <a href="https://github.com/ALVAROI12" rel="noopener noreferrer">github.com/ALVAROI12</a>, with tests and evaluation scripts where it matters.</p>
+    <ul class="projects">
+      <li class="proj">
+        <h3><a href="https://github.com/ALVAROI12/settlement-reconciler" rel="noopener noreferrer">Settlement reconciliation agent</a></h3>
         <p>Ties out POS, processor and bank ledgers for multi-location retail. A synthetic generator with ground truth, a staged matcher, and LLM review of the residual. <span class="metric">0.99 F1</span> against a 0.82 exact-match baseline over four seeded periods.</p>
-        <div class="stack">python · zero deps · byte-reproducible · eval harness</div>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/ALVAROI12/inventory-intelligence">Inventory intelligence</a></h3>
+        <p class="stack">python · zero deps · byte-reproducible · eval harness</p>
+      </li>
+      <li class="proj">
+        <h3><a href="https://github.com/ALVAROI12/inventory-intelligence" rel="noopener noreferrer">Inventory intelligence</a></h3>
         <p>Per-SKU demand forecasting turned into a buy plan and scored against true demand — including demand no policy was allowed to see. <span class="metric">0.93 fill rate with 50% less stock</span> than a four-week cover rule, on 2.5k real SKUs.</p>
-        <div class="stack">python · Online Retail II · 20 tests</div>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/ALVAROI12/chatbot-pi">Edge LLM chatbot on Raspberry Pi</a></h3>
+        <p class="stack">python · Online Retail II · 20 tests</p>
+      </li>
+      <li class="proj">
+        <h3><a href="https://github.com/ALVAROI12/chatbot-pi" rel="noopener noreferrer">Edge LLM chatbot on Raspberry Pi</a></h3>
         <p>Transformer inference that fits in Pi memory: sliding-window, quantized and paged KV-caches, INT8/INT4 weights, and live latency, memory and tokens-per-second readouts.</p>
-        <div class="stack">pytorch · aarch64 · CLI + web UI</div>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/ALVAROI12/real-time-inference-pipeline">Real-time inference pipeline</a></h3>
+        <p class="stack">pytorch · aarch64 · CLI + web UI</p>
+      </li>
+      <li class="proj">
+        <h3><a href="https://github.com/ALVAROI12/real-time-inference-pipeline" rel="noopener noreferrer">Real-time inference pipeline</a></h3>
         <p>YOLOv8 on ONNX Runtime behind FastAPI and WebSockets, <span class="metric">sub-100 ms</span> per frame. Dockerised with Prometheus/Grafana monitoring, Kubernetes HPA, and ECS / Cloud Run deploy configs.</p>
-        <div class="stack">onnx · fastapi · websockets · k8s</div>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/ALVAROI12/smartwatch-stress-detection">Wearable stress detection (MSEE thesis)</a></h3>
+        <p class="stack">onnx · fastapi · websockets · k8s</p>
+      </li>
+      <li class="proj">
+        <h3><a href="https://github.com/ALVAROI12/smartwatch-stress-detection" rel="noopener noreferrer">Wearable stress detection (MSEE thesis)</a></h3>
         <p>Multi-dataset fusion of WESAD, EPM-E4 and PhysioNet — 96 subjects, 39 HR/HRV/EDA/temperature features. Optuna-tuned XGBoost at <span class="metric">94.5% accuracy</span> (95% CI 93.5–95.5), served through FastAPI.</p>
-        <div class="stack">xgboost · optuna · bootstrap CIs · McNemar</div>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/ALVAROI12/rover_2">Person-following rover</a></h3>
+        <p class="stack">xgboost · optuna · bootstrap CIs · McNemar</p>
+      </li>
+      <li class="proj">
+        <h3><a href="https://github.com/ALVAROI12/rover_2" rel="noopener noreferrer">Person-following rover</a></h3>
         <p>ROS 2 rover in Gazebo that finds a person with YOLOv8, tracks them across frames, and follows while avoiding obstacles. Eight-wheel differential drive with odometry feedback.</p>
-        <div class="stack">ros2 jazzy · gazebo · yolov8</div>
-      </div>
-      <div class="proj">
-        <h3><a href="https://github.com/ALVAROI12/transformer-assignment-clean">GPT-style transformer from scratch</a></h3>
+        <p class="stack">ros2 jazzy · gazebo · yolov8</p>
+      </li>
+      <li class="proj">
+        <h3><a href="https://github.com/ALVAROI12/transformer-assignment-clean" rel="noopener noreferrer">GPT-style transformer from scratch</a></h3>
         <p>10.8M-parameter decoder implemented from the paper, trained on Tiny Shakespeare in 11 minutes on a laptop GPU, with a companion study of KV-cache speedup, batching and sequence scaling.</p>
-        <div class="stack">pytorch · 1.26 val loss · systems analysis</div>
-      </div>
-      <div class="proj">
+        <p class="stack">pytorch · 1.26 val loss · systems analysis</p>
+      </li>
+      <li class="proj">
         <h3>Agentic operations assistant</h3>
         <p>A Telegram front-end to a Claude agent that runs multi-step actions on my private homelab — camera streams, services, files — over Tailscale, with structured tool schemas and guardrails on what it may touch.</p>
-        <div class="stack">claude · openclaw · tailscale · raspberry pi 5</div>
-      </div>
-    </div>
+        <p class="stack">claude · openclaw · tailscale · raspberry pi 5</p>
+      </li>
+    </ul>
   </div>
 </section>
 
 <section id="xp">
   <div class="wrap">
     <h2>Experience</h2>
-    <div class="xp" style="margin-top:14px">
-      <div class="xp-row">
-        <div class="when">Aug 2025 – now</div>
+    <ul class="xp">
+      <li class="xp-row">
+        <div class="when"><time datetime="2025-08">Aug 2025</time> – now</div>
         <div><h3>Software &amp; systems engineer / operations lead</h3><div class="org">Heights Pool, San Antonio</div>
           <p>Linux-based automation for scheduling, payroll and POS reconciliation that removed the manual workflows behind a seasonal facility and cut operating costs by $100K. LLM-assisted document and reporting pipelines.</p></div>
-      </div>
-      <div class="xp-row">
-        <div class="when">Jan 2025 – now</div>
-        <div><h3>Founder &amp; lead engineer <span class="muted" style="font-weight:400">(nonprofit, part-time)</span></h3><div class="org">NeuroPulse AI</div>
+      </li>
+      <li class="xp-row">
+        <div class="when"><time datetime="2025-01">Jan 2025</time> – now</div>
+        <div><h3>Founder &amp; lead engineer <span class="role-note">(nonprofit, part-time)</span></h3><div class="org">NeuroPulse AI</div>
           <p>Real-time AI for early cardiovascular and mental-health risk detection from wearables. I own the pipeline end to end, from ingestion to edge deployment.</p></div>
-      </div>
-      <div class="xp-row">
-        <div class="when">Jan – Aug 2025</div>
+      </li>
+      <li class="xp-row">
+        <div class="when"><time datetime="2025-01">Jan</time> – <time datetime="2025-08">Aug 2025</time></div>
         <div><h3>AI &amp; robotics research intern</h3><div class="org">University of Texas at San Antonio</div>
           <p>Embedded control software and GPU-accelerated RL training tasks (+20% throughput). Proposed extending the Energon sparse-attention accelerator to autoregressive LLM inference on a Raspberry Pi 5.</p></div>
-      </div>
-      <div class="xp-row">
-        <div class="when">2023 – 2024</div>
+      </li>
+      <li class="xp-row cyber" id="cybersecurity">
+        <div class="when"><time datetime="2023">2023</time> – <time datetime="2024">2024</time></div>
         <div><h3>Machine learning intern, cybersecurity</h3><div class="org">University of the Incarnate Word</div>
-          <p>Network anomaly detection pipelines with 30% lower detection latency; TensorRT/CUDA inference 35% faster than the baseline runtime.</p></div>
-      </div>
-      <div class="xp-row">
-        <div class="when">2022 – 2023</div>
+          <p>Network anomaly detection pipelines with <span class="metric">30%</span> lower detection latency; TensorRT/CUDA inference <span class="metric">35%</span> faster than the baseline runtime.</p></div>
+      </li>
+      <li class="xp-row">
+        <div class="when"><time datetime="2022">2022</time> – <time datetime="2023">2023</time></div>
         <div><h3>AI research assistant, TinyML for IoT</h3><div class="org">University of the Incarnate Word</div>
           <p>PyTorch → ONNX → TensorRT deployments onto microcontroller-class edge devices.</p></div>
-      </div>
-      <div class="xp-row">
+      </li>
+      <li class="xp-row">
         <div class="when">Education</div>
         <div><h3>M.S. Electrical Engineering, UT San Antonio</h3><div class="org">Neural networks &amp; embedded AI · thesis: multi-class physiological state detection using wearable sensors</div>
           <p>B.S. Mechatronics Engineering, University of the Incarnate Word — robotics, control systems, embedded ML.</p></div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </section>
 
